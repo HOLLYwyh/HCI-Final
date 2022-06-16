@@ -1,8 +1,8 @@
 {
     "manifest_version":2,
-    "name":"helloWorld",
+    "name":"语音助手",
     "version":"1.0",
-    "description":"hello world",
+    "description":"语音助手插件，可以听音乐，玩游戏，还能和你聊天哦",
     "icons":{
         "128":"img/logo_blue.png",
         "48":"img/logo_blue.png",
@@ -13,9 +13,6 @@
         "default_icon":"img/logo_blue.png",
         "default_popup":"popup.html"
     },
-    //   "chrome_url_overrides" : {
-    //     "newtab": "index.html"
-    //   },
     "content_scripts": 
 	[
 		{

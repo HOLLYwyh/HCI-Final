@@ -201,6 +201,7 @@ artyom.addCommands([
         indexes: ['暂停音乐*',"暂停播放*"],
         action: (i, wildcard) => {
             changeMode(" ")
+            document.getElementById("content").innerText = "已暂停播放: Nocturne in B Major, Op.9 No.3";
             console.log("已暂停播放");
             var audio = document.getElementById("audio_");
             audio.pause();
@@ -218,11 +219,29 @@ artyom.addCommands([
         }
     },
     {
+        smart: true,
+        indexes: ['Siri*'],
+        action: (i, wildcard) => {
+            changeMode(" ")
+            // document.getElementById("content").innerText="您说了："+wildcard;
+            $.get("https://api.ownthink.com/bot?spoken=" + wildcard, function (data) {
+                var response = data.data
+                var content = response.info.text
+                console.log(content)
+                var innerHtml = "<h4>Siri：" + content + "</h4>"
+                document.getElementById("content").innerHTML = innerHtml
+                console.log(content.length)
+                say(content, 1000*content.length/3);
+            });
+        }
+    },
+    {
         smart:true,
         indexes:['*'],
         action:(i,wildcard)=>{
             changeMode(" ")
             document.getElementById("content").innerText="您说了："+wildcard;
+           
         }
     },
 
