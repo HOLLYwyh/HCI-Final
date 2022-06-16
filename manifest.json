@@ -4,18 +4,18 @@
     "version":"1.0",
     "description":"hello world",
     "icons":{
-        "128":"img/logo.png",
-        "48":"img/logo.png",
-        "16":"img/logo.png"
+        "128":"img/logo_blue.png",
+        "48":"img/logo_blue.png",
+        "16":"img/logo_blue.png"
     },
     
       "browser_action":{
-        "default_icon":"img/logo.png",
-        "default_popup":"index.html"
+        "default_icon":"img/logo_blue.png",
+        "default_popup":"popup.html"
     },
-      "chrome_url_overrides" : {
-        "newtab": "index.html"
-      },
+    //   "chrome_url_overrides" : {
+    //     "newtab": "index.html"
+    //   },
     "content_scripts": 
 	[
 		{
