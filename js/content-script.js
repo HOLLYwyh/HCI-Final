@@ -10,12 +10,12 @@ function changeMode(mode){
 
 
 
-function transformToPinYin(text){
+async function transformToPinYin(text){
     $.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text="+text,function(data){
-    console.log(data);
-    var jianxie = data.newslist[0].jianxie    
+        console.log(data);
+        var jianxie = data.newslist[0].jianxie
         console.log(jianxie);    
-        return jianxie
+        return jianxie    
     })
 } 
 
@@ -38,8 +38,8 @@ artyom.addCommands([
         action:(i,wildcard)=>{
             changeMode("猜地名模式")
             if(wildcard!=""){
-                console.log(answer);
-                console.log(wildcard);
+                console.log("answer="+transformToPinYin(answer));
+                console.log("wildcard="+transformToPinYin(wildcard));
                 var content = ""
                 if(transformToPinYin(answer)==transformToPinYin(wildcard)){
                     content = "回答正确，答案是"+answer;
