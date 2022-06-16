@@ -10,14 +10,14 @@ function changeMode(mode){
 
 
 
-function transformToPinYin(text){
-    $.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text="+text,function(data){
-    console.log(data);
-    var jianxie = data.newslist[0].jianxie    
-        console.log(jianxie);    
-        return jianxie
-    })
-} 
+// function transformToPinYin(text){
+//     $.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text="+text,function(data){
+//     console.log(data); 
+//     var jianxie = data.newslist[0].jianxie    
+//         console.log(jianxie);    
+//         return jianxie
+//     })
+// } 
 
 
 function say(content,time){
@@ -41,11 +41,16 @@ artyom.addCommands([
                 console.log(answer);
                 console.log(wildcard);
                 var content = ""
-                if(transformToPinYin(answer)==transformToPinYin(wildcard)){
-                    content = "回答正确，答案是"+answer;
-                }else{
-                    content = "回答错误，答案是"+answer;
-                }
+                $.when($.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text="+wildcard), $.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text=" + answer)).done(function ([a], [b]) {
+                    console.log("a", a.newslist[0].jianxie);
+                    console.log("b", b.newslist[0].jianxie);
+                    if(a.newslist[0].jianxie==b.newslist[0].jianxie){
+                        content = "回答正确，答案是"+answer;
+                    }else{
+                        content = "回答错误，答案是"+answer;
+                    }
+                });
+
                 document.getElementById("content").innerText=content;
                 say(content,6000);
             }else{
@@ -54,7 +59,7 @@ artyom.addCommands([
                     var response = data.newslist[0];
                     var content = response.quest;
                     answer = response.result;
-                    say(content,5000);
+                    say(content,1000*content.length/3);
                 })
             }
             
