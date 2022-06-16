@@ -57,6 +57,7 @@ artyom.addCommands([
                     var response = data.newslist[0];
                     var content = response.quest;
                     answer = response.result;
+                    document.getElementById("content").innerText=content
                     say(content,1000*content.length/3);
                 })
             }
