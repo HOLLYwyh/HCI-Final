@@ -35,14 +35,30 @@ artyom.addCommands([
     },
     // 精美文案
     {
-        smart:false,
-        indexes: ['精美文案'],
+        smart:true,
+        indexes: ['精美文案*'],
         action:(i,wildcard) => {
             $.get("http://api.tianapi.com/pyqwenan/index?key=f808a5446c7304744dcfdc4fbc868a87",function(data){
                 var content = data.newslist[0].content;
-                console.log(content)
                 artyom.say(content);
+                var innerHtml = "<h4>" + content + "</h4>"
+                document.getElementById("content").innerHTML=innerHtml
             });
+        }
+    },
+    // 搜索
+    {
+        smart: true,
+        indexes: ['百度搜索*'],
+        action:(i,wildcard) => {
+            window.open("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd="+wildcard +"&fenlei=256&rsv_pq=c71864d500008a5a&rsv_t=cf74Qfa7Vqlo3p8cVq3JiowbAbpjDmlL5w66ztRDNBdHQ3iy8l%2BzQ8oMVWmK&rqlang=en&rsv_dl=tb&rsv_enter=1&rsv_sug3=4&rsv_sug2=0&rsv_btype=i&inputT=638&rsv_sug4=783&rsv_jmp=fail","_blank")
+        }
+    },
+    {
+        smart: true,
+        indexes: ['谷歌搜索*'],
+        action:(i,wildcard) => {
+            window.open("https://www.google.com/search?q="+wildcard+"&sxsrf=ALiCzsZVpUiNmVeo5i0dOOzlR0HpzK5Xsw%3A1655373750571&source=hp&ei=tv-qYomkIJWJ-AbQwq2QCw&iflsig=AJiK0e8AAAAAYqsNxvtUtnI1jCLtzBhGyv_uC5vUYn14&ved=0ahUKEwiJ1_vi27H4AhWVBN4KHVBhC7IQ4dUDCAc&uact=5&oq=1&gs_lcp=Cgdnd3Mtd2l6EAMyBAgjECcyBAgjECcyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUILhCABDIFCAAQgAQyBQgAEIAEMgUIABCABFAAWABgjgVoAHAAeACAAYkCiAGJApIBAzItMZgBAKABAQ&sclient=gws-wiz","_blank")
         }
     },
     {
