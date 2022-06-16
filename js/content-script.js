@@ -167,13 +167,40 @@ artyom.addCommands([
         }
     },
     {
+        indexes: ['播放音乐'],
+        action: (i, wildcard) => {
+            changeMode("音乐播放模式")
+            document.getElementById("content").innerText = "正在播放: Nocturne in B Major, Op.9 No.3";
+            console.log("开始播放");
+            const audioContext = new AudioContext();
+            const element = document.querySelector(audio);
+            const source = audioContext.createMediaElementSource(element);
+            source.connect(audioContext.destination)
+            audio.play();
+        }
+    },
+    {
+        indexes: ['暂停音乐*', "停止音乐*"],
+        action: (i, wildcard) => {
+            changeMode(" ")
+            console.log("已停止播放");
+            const audioContext = new AudioContext();
+            const element = document.querySelector(audio);
+            const source = audioContext.createMediaElementSource(element);
+            source.connect(audioContext.destination)
+            audio.pause();
+    
+        }
+    },
+    {
         smart:true,
         indexes:['*'],
         action:(i,wildcard)=>{
             changeMode(" ")
             document.getElementById("content").innerText="您说了："+wildcard;
         }
-    }
+    },
+
 ]);
 
 artyom.initialize({
