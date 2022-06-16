@@ -11,6 +11,7 @@ document.getElementById("test").addEventListener("click",function(){
 },false);
 
 artyom.addCommands([
+    // 天气查询
     {
         smart:true,
         indexes: ['*天气'],
@@ -24,24 +25,51 @@ artyom.addCommands([
             });
         }
     },
+    // 精美文案
     {
-        indexes: ['Repeat after me *'],
-        smart:true,
-        action: (i,wildcard) => {
-            say("You've said : "+ wildcard);
+        smart:false,
+        indexes: ['精美文案'],
+        action:(i,wildcard) => {
+            $.get("http://api.tianapi.com/pyqwenan/index?key=f808a5446c7304744dcfdc4fbc868a87",function(data){
+                var content = data.newslist[0].content;
+                console.log(content)
+                artyom.say(content);
+            });
         }
     },
-    // The smart commands support regular expressions
     {
-        indexes: [/Good Morning/i],
+        indexes: ['Repeat after me*'],
         smart:true,
         action: (i,wildcard) => {
             artyom.say("You've said : "+ wildcard);
         }
     },
+    // The smart commands support regular expressions
+    {
+        indexes: ['Good Morning*'],
+        smart:true,
+        action: (i,wildcard) => {
+            artyom.say("Good morning: "+ wildcard);
+        }
+    },
+    {
+        indexes: ['Good Afternoon*'],
+        smart:true,
+        action: (i,wildcard) => {
+            artyom.say("Good Afternoon: "+ wildcard);
+        }
+    },
+    {
+        indexes: ['Good Evening*'],
+        smart:true,
+        action: (i,wildcard) => {
+            artyom.say("Good Evening: "+ wildcard);
+        }
+    },
     {
         indexes: ['shut down yourself'],
         action: (i,wildcard) => {
+            artyom.say("Artyom succesfully stopped")
             artyom.fatality().then(() => {
                 console.log("Artyom succesfully stopped");
             });
