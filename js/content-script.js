@@ -38,8 +38,6 @@ artyom.addCommands([
         action:(i,wildcard)=>{
             changeMode("猜地名模式")
             if(wildcard!=""){
-                console.log('answer', answer);
-                console.log(wildcard);
                 var content = ""
                 $.when($.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text="+wildcard), $.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text=" + answer)).done(function ([a], [b]) {
                     console.log("a", a.newslist[0].jianxie);
