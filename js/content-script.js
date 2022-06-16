@@ -47,9 +47,10 @@ artyom.addCommands([
                     }else{
                         content = "回答错误，答案是"+answer;
                     }
+                    document.getElementById("content").innerText=content;
                     say(content,6000);
                 });
-                document.getElementById("content").innerText=content;
+
             }else{
                 $.get("http://api.tianapi.com/cityriddle/index?key=94b1ce35f4803078d9f8afc89825f03c",function(data){
                     console.log(data);    
