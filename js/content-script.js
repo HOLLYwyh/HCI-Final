@@ -38,8 +38,6 @@ artyom.addCommands([
         action:(i,wildcard)=>{
             changeMode("猜地名模式")
             if(wildcard!=""){
-                console.log("answer="+transformToPinYin(answer));
-                console.log("wildcard="+transformToPinYin(wildcard));
                 var content = ""
                 $.when($.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text="+wildcard), $.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text=" + answer)).done(function ([a], [b]) {
                     console.log("a", a.newslist[0].jianxie);
@@ -49,10 +47,9 @@ artyom.addCommands([
                     }else{
                         content = "回答错误，答案是"+answer;
                     }
+                    say(content,6000);
                 });
-
                 document.getElementById("content").innerText=content;
-                say(content,6000);
             }else{
                 $.get("http://api.tianapi.com/cityriddle/index?key=94b1ce35f4803078d9f8afc89825f03c",function(data){
                     console.log(data);    
