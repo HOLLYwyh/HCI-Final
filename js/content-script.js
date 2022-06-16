@@ -1,10 +1,23 @@
 
 var artyom = new Artyom();
 
+var answer = null;
 
 function changeMode(mode){
     document.getElementById("pattern").innerText=mode;
 }
+
+
+
+function transformToPinYin(text){
+    $.get("http://api.tianapi.com/pinyin/index?key=94b1ce35f4803078d9f8afc89825f03c&text="+text,function(data){
+    console.log(data);
+    var jianxie = data.newslist[0].jianxie    
+        console.log(jianxie);    
+        return jianxie
+    })
+} 
+
 
 function say(content,time){
     artyom.dontObey();
@@ -17,6 +30,34 @@ function say(content,time){
 }
 
 artyom.addCommands([
+    {
+        indexes: ["猜地名*"],
+        smart:true,
+        action:(i,wildcard)=>{
+            changeMode("猜地名模式")
+            if(wildcard!=""){
+                console.log(answer);
+                console.log(wildcard);
+                var content = ""
+                if(transformToPinYin(answer)==transformToPinYin(wildcard)){
+                    content = "回答正确，答案是"+answer;
+                }else{
+                    content = "回答错误，答案是"+answer;
+                }
+                document.getElementById("content").innerText=content;
+                say(content,6000);
+            }else{
+                $.get("http://api.tianapi.com/cityriddle/index?key=94b1ce35f4803078d9f8afc89825f03c",function(data){
+                    console.log(data);    
+                    var response = data.newslist[0];
+                    var content = response.quest;
+                    answer = response.result;
+                    say(content,5000);
+                })
+            }
+            
+        }
+    },
     {
         smart:true,
         indexes: ['*天气'],
@@ -66,14 +107,7 @@ artyom.addCommands([
             artyom.say("You've said : "+ wildcard);
         }
     },
-    {
-        indexes: ['shut down yourself'],
-        action: (i,wildcard) => {
-            artyom.fatality().then(() => {
-                console.log("Artyom succesfully stopped");
-            });
-        }
-    },
+    
     {
         smart:true,
         indexes:['*'],
