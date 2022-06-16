@@ -1,20 +1,20 @@
 
 var artyom = new Artyom();
 
-document.getElementById("test").addEventListener("click",function(){
-    $.get("https://api.seniverse.com/v3/weather/now.json?key=S_ud5ewwKE8dTkOH_&location=上海&language=zh-Hans&unit=c",function(data){
-        var weather = data.results[0].now.text;
-        var temperature = data.results[0].now.temperature;
-        var content = "今天的天气是"+weather+"，气温是"+temperature+"摄氏度"
-        artyom.say(content); 
-    })
-},false);
 
 function changeMode(mode){
     document.getElementById("pattern").innerText=mode;
 }
 
-
+function say(content,time){
+    artyom.dontObey();
+    artyom.say(content);
+    setTimeout(() => {
+        // Enable command recognition again
+        artyom.obey();
+        // Try to say hello again and now the command will be recognized
+    }, time);
+}
 
 artyom.addCommands([
     {
@@ -26,7 +26,7 @@ artyom.addCommands([
                 var weather = data.results[0].now.text;
                 var temperature = data.results[0].now.temperature;
                 var content = wildcard+"今天是"+weather+"，气温是"+temperature+"摄氏度"
-                artyom.say(content);
+                say(content,6000);
                 var innerHtml = "<h4>"+wildcard+" 天气："+weather+",气温："+temperature+"℃</h4>"
                 document.getElementById("content").innerHTML=innerHtml
             });
@@ -49,7 +49,7 @@ artyom.addCommands([
                 var tip = response.tip
                 if(result==0||result ==1){
                     var content = chengyu+",请继续" 
-                    artyom.say(content);
+                    say(content,5000);
                     innerHtml = "<h4>"+chengyu+",积分："+grade+"</h4><h4>"+jieshi+"</h4>"
                     document.getElementById("content").innerHTML=innerHtml
                 }else{
