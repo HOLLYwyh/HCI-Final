@@ -8,17 +8,14 @@
         "48":"img/logo.png",
         "16":"img/logo.png"
     },
-    //  "background": {
-    //      "scripts": ["js/content-script.js" ]
-    //   },
+    
       "browser_action":{
         "default_icon":"img/logo.png",
         "default_popup":"index.html"
     },
-    //   "chrome_url_overrides" : {
-    //     "newtab": "index.html"
-    //   }
-    
+      "chrome_url_overrides" : {
+        "newtab": "index.html"
+      },
     "content_scripts": 
 	[
 		{
