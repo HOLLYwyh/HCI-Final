@@ -4,7 +4,7 @@
   text-align: center;
   font-size:.9em;
   width: 100%;
-  top:5%;
+  top:2%;
   margin: auto;
   font-family:'Open Sans', sans-serif;
   color:#653f4c;
@@ -19,7 +19,7 @@
 #instructions{
   position:absolute;
   width:100%;
-  top:50%;
+  top:58%;
   margin: auto;
   margin-top:120px;
   font-family:'Open Sans', sans-serif;
