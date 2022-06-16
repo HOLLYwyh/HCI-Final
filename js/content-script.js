@@ -1,3 +1,4 @@
+document.documentElement.scrollTop=0
 
 var artyom = new Artyom();
 
@@ -100,6 +101,23 @@ artyom.addCommands([
         indexes: ['谷歌搜索*'],
         action:(i,wildcard) => {
             window.open("https://www.google.com/search?q="+wildcard,"_blank")
+        }
+    },
+    // 控制滚轮
+    {
+        smart: true,
+        indexes: ['向下*'],
+        action:(i,wildcard) => {
+            document.documentElement.scrollTop+=100
+            console.log(document.documentElement.scrollTop)
+        }
+    },
+    {
+        smart: true,
+        indexes: ['向上*'],
+        action:(i,wildcard) => {
+            document.documentElement.scrollTop-=100
+            console.log(document.documentElement.scrollTop)
         }
     },
     {
