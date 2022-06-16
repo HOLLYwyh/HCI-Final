@@ -50,6 +50,9 @@ artyom.addCommands([
         smart:true,
         action: (i,wildcard) => {
             artyom.say("You've said : "+ wildcard);
+        }
+    },
+    {
         indexes: ['成语接龙*'],
         smart:true,
         action: (i,wildcard) => {
