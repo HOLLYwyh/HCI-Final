@@ -1,4 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+#tips {
+  position: absolute;
+  text-align: center;
+  font-size:.9em;
+  width: 100%;
+  top:5%;
+  margin: auto;
+  font-family:'Open Sans', sans-serif;
+  color:#653f4c;
+}
 #world {
   background: #ebe5e7;
   position:absolute;
